@@ -2,8 +2,26 @@
 
 This is a testing repository to play around with k8s resources and helm.
 
+## Installing dependencies
+```sh
+helm dependency build charts/hello-helm
+```
+
+## Deploying chart
+```sh
+helm install charts/hello-helm --generate-name  # with "random" name
+# or
+helm install <helm-name> charts/hello-helm      # with custom name
+```
+
+## Check deployment
+```
+helm ls
+kubctl get pods
+```
+
 ## Things to try
-[ ] Dependencies
+[x] Dependencies
 [ ] PSC or PV
 [ ] Deployment
 [ ] Service
