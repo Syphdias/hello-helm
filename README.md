@@ -43,12 +43,21 @@ helm install -f my-values.yaml charts/hello-helm --generate-name
 helm upgrade -f my-values.yaml $CHART_NAME ./charts/hello-helm --set mysql.auth.rootPassword=$MYSQL_ROOT_PASSWORD   # bad! read above
 ```
 
+## Keeping Service after uninstall
+Keeping a service (or other resource) works via
+`metadata.annotations."helm.sh/resource-policy": "keep"`.
+
+I could hard code the annotation but wanted to make it optional and default to
+`delete`. This did not work and needs further investigation. The service will
+not get deleted on `helm unistall` even with explicit `delete` as
+`helm.sh/resource-policy`.
+
 ## Things to try
 [x] Dependencies
 [ ] PSC or PV
 [ ] Deployment
 [ ] Service
-[ ] Uninstall without removing service
+[x] Uninstall without removing service
 [x] Scaler
 [ ] Secrets and Environment Variables
 [ ] Packaging
