@@ -3,14 +3,14 @@
 This is a testing repository to play around with k8s resources and helm.
 
 ## Things to try
-- Dependencies
-- PSC or PV
-- Deployment
-- Service
-- Uninstall without removing service
-- Scaler
-- Secrets and Environment Variables
-- Packaging
+[ ] Dependencies
+[ ] PSC or PV
+[ ] Deployment
+[ ] Service
+[ ] Uninstall without removing service
+[ ] Scaler
+[ ] Secrets and Environment Variables
+[ ] Packaging
 
 ## Open questions
 ### What should be the git repository?
