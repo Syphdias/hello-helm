@@ -3,3 +3,7 @@ replicaCount: 2
 # You can either define replicaCount OR enable autoscaling!
 # autoscaling:
 #   enabled: false
+
+# ignore service on helm uninstall
+service:
+  resource_policy: "keep"

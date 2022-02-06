@@ -4,6 +4,8 @@ metadata:
   name: {{ include "hello-helm.fullname" . }}
   labels:
     {{- include "hello-helm.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/resource-policy": {{ or .Values.service.resource_policy "delete" }}
 spec:
   type: {{ .Values.service.type }}
   ports:
