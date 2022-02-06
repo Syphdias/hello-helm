@@ -7,3 +7,6 @@ replicaCount: 2
 # ignore service on helm uninstall
 service:
   resource_policy: "keep"
+
+# get persistent volume for nginx pod
+persistentVolume: True

@@ -1,0 +1,15 @@
+{{- if .Values.persistentVolume }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "hello-helm.fullname" . }}
+  labels:
+    {{- include "hello-helm.labels" . | nindent 4 }}
+spec:
+  #volumeName: {{ include "hello-helm.fullname" . }}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+{{- end }}

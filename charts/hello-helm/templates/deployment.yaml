@@ -33,6 +33,11 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.persistentVolume }}
+          volumeMounts:
+            - mountPath: "/mnt/data"
+              name: {{ include "hello-helm.fullname" . }}
+          {{- end }}
           ports:
             - name: http
               containerPort: 80
@@ -47,6 +52,12 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+      {{- if .Values.persistentVolume }}
+      volumes:
+        - name: {{ include "hello-helm.fullname" . }}
+          persistentVolumeClaim:
+            claimName: {{ include "hello-helm.fullname" . }}
+      {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
