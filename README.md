@@ -20,13 +20,36 @@ helm ls
 kubctl get pods
 ```
 
+## Upgrading chart
+Since we have mysql as dependency, we need to make sure to keep the password on
+upgrades.
+
+The method I use exposed the password to all users on that host. **Do not use
+this method on a host you do not trust!** I have not looked into a method that
+does not expose the password to the process tree.
+
+Assuming your chat name is `hello-helm-1644148306`:
+```sh
+CHART_NAME=hello-helm-1644148306-mysql
+MYSQL_ROOT_PASSWORD=$(kubectl get secret --namespace "default" ${CHART_NAME}-mysql -o jsonpath="{.data.mysql-root-password}" | base64 --decode)
+helm upgrade $CHART_NAME ./charts/hello-helm --set mysql.auth.rootPassword=$MYSQL_ROOT_PASSWORD     # bad! read above
+```
+
+## Overriding values
+To override values from the default `values.yaml`:
+```sh
+helm install -f my-values.yaml charts/hello-helm --generate-name
+# same for upgrades
+helm upgrade -f my-values.yaml $CHART_NAME ./charts/hello-helm --set mysql.auth.rootPassword=$MYSQL_ROOT_PASSWORD   # bad! read above
+```
+
 ## Things to try
 [x] Dependencies
 [ ] PSC or PV
 [ ] Deployment
 [ ] Service
 [ ] Uninstall without removing service
-[ ] Scaler
+[x] Scaler
 [ ] Secrets and Environment Variables
 [ ] Packaging
 

@@ -1,0 +1,5 @@
+replicaCount: 2
+
+# You can either define replicaCount OR enable autoscaling!
+# autoscaling:
+#   enabled: false
