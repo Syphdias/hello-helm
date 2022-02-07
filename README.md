@@ -14,6 +14,11 @@ helm install charts/hello-helm --generate-name  # with "random" name
 helm install <helm-name> charts/hello-helm      # with custom name
 ```
 
+## Packaging
+```sh
+helm package charts/hello-helm/
+```
+
 ## Check deployment
 ```
 helm ls
@@ -34,6 +39,20 @@ CHART_NAME=hello-helm-1644148306-mysql
 MYSQL_ROOT_PASSWORD=$(kubectl get secret --namespace "default" ${CHART_NAME}-mysql -o jsonpath="{.data.mysql-root-password}" | base64 --decode)
 helm upgrade $CHART_NAME ./charts/hello-helm --set mysql.auth.rootPassword=$MYSQL_ROOT_PASSWORD     # bad! read above
 ```
+
+Alternatively you can use a separate `values.yaml` file to store secrets and
+**not** commit them to the git repo:
+```
+cat > secrets.yaml <<EOF
+mysql:
+  auth:
+    rootPassword: "$MYSQL_ROOT_PASSWORD"
+EOF
+helm upgrade $CHART_NAME -f secrets.yaml ./charts/hello-helm
+```
+
+`-f secrets.yaml` needs to be provided with every upgrade and needs to be added
+last after all other [override files](#Overriding-values).
 
 ## Overriding values
 To override values from the default `values.yaml`:
@@ -63,8 +82,8 @@ Option to create PV via PVC and mount PV at `/mnt/data/` in hello-app Container:
 [x] Service
 [x] Uninstall without removing service
 [x] Scaler
-[ ] Secrets and Environment Variables
-[ ] Packaging
+[x] Secrets and Environment Variables
+[x] Packaging
 
 ## Open questions
 ### What should be the git repository?
