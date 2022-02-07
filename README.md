@@ -52,15 +52,15 @@ I could hard code the annotation but wanted to make it optional and default to
 not get deleted on `helm unistall` even with explicit `delete` as
 `helm.sh/resource-policy`.
 
-## Configure PersistentVolume for nginx Pod
-Option to create PV via PVC and mount PV at `/mnt/data/` in nginx Container:
+## Configure PersistentVolume for hello-app Pod
+Option to create PV via PVC and mount PV at `/mnt/data/` in hello-app Container:
 `persistentVolume: True`
 
 ## Things to try
 [x] Dependencies
 [x] PSC or PV
-[ ] Deployment
-[ ] Service
+[x] Deployment
+[x] Service
 [x] Uninstall without removing service
 [x] Scaler
 [ ] Secrets and Environment Variables

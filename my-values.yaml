@@ -8,5 +8,5 @@ replicaCount: 2
 service:
   resource_policy: "keep"
 
-# get persistent volume for nginx pod
+# get persistent volume for hello-app pod
 persistentVolume: True
