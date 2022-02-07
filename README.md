@@ -76,14 +76,14 @@ Option to create PV via PVC and mount PV at `/mnt/data/` in hello-app Container:
 `persistentVolume: True`
 
 ## Things to try
-[x] Dependencies
-[x] PSC or PV
-[x] Deployment
-[x] Service
-[x] Uninstall without removing service
-[x] Scaler
-[x] Secrets and Environment Variables
-[x] Packaging
+- [x] Dependencies
+- [x] PSC or PV
+- [x] Deployment
+- [x] Service
+- [x] Uninstall without removing service
+- [x] Scaler
+- [x] Secrets and Environment Variables
+- [x] Packaging
 
 ## Open questions
 ### What should be the git repository?
